@@ -28,16 +28,19 @@ soup = BeautifulSoup(content, "lxml")
 
 head = soup.head
 
+print("~~~~~head.contents~~~~~")
 for child in head.contents:
     print(child if child is not None else "")
 
 body = soup.body
 
+print("~~~~~body.contents~~~~~")
 for child in body.contents:
     print(child if child is not None else "")
 
+print("~~~~~body.children~~~~~")
 for child in body.children:
     print(child if child is not None else "")
 
-print(type(soup.body.contents))
-print(type(soup.body.children))
+# print(type(soup.body.contents)) # --> List
+# print(type(soup.body.children)) # --> Iterator

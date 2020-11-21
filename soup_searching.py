@@ -8,7 +8,7 @@ with open("test.html") as file:
 
 soup = BeautifulSoup(html, "lxml")
 
-tests = [4]
+tests = [5]
 
 if 1 in tests:
     print("")
@@ -77,4 +77,37 @@ if 4 in tests:
     for tag in soup.find_all("title", recursive=False):
         print(tag)
     
+if 5 in tests:
+    print("")
+    print("\n1")
+    # find is like find_all but returns only the first match
+    # and does not return a list...
+    for tag in soup.find("title"):
+        print(tag)
+    print (soup.find("title"))
+    
+    print("")
+    print("\n2")
+    # note: find returns a tag element:
+    x = soup.find("title")
+    print(type(x))
+    print(x)
+    print("")
+    print("\n3")
+    # iterating this result returns the things in the tag:
+    for x in soup.find("title"):
+        print(type(x))
+        print(x)
 
+    print("")
+    print("\n4")
+    # note: find_all returns a list (actually a ResultSet!):
+    x = soup.find_all("title", limit=1)
+    print(type(x))
+    print(x)
+    print("")
+    print("\n5")
+    # iterating this result returns the things in the ResultSet:
+    for x in soup.find_all("title", limit=1):
+        print(type(x))
+        print(x)

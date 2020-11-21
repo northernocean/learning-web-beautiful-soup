@@ -2,23 +2,20 @@ from bs4 import BeautifulSoup
 import requests
 from fake_useragent import UserAgent
 
-def read_file():
-    with open("test.html") as file:
-        return file.read()
-
-html = read_file()
+with open("test.html") as file:
+    html = file.read()
 
 soup = BeautifulSoup(html, "lxml")
 
-tests = [0]
+tests = [13]
 
 if 0 in tests:
-    print("A)\n", soup.prettify())
-    print("B)\n", soup.meta["charset"])
-    print("C)\n", soup.title.string)
+    print("A)\n", soup.prettify(), sep="")
+    print("B)\n", soup.meta["charset"], sep="")
+    print("C)\n", soup.title.string, sep="")
     soup.title.string = "***"
-    print("D)\n", soup.prettify())
-    print("E)\n", soup.p)
+    print("D)\n", soup.prettify(), sep="")
+    print("E)\n", soup.p, sep="")
 
 if 1 in tests:
     print("")
@@ -100,3 +97,20 @@ if 10 in tests:
     print(soup.body.p.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling) # a newline character
     print(soup.body.p.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling) # None
 
+if 11 in tests:
+    # siblings
+    print(soup.body.previous_sibling) # a newline character
+    print(soup.body.previous_sibling.previous_sibling) # head
+
+if 12 in tests:
+    # better way to get all siblings (also works for previous_siblings)
+    for sibling in soup.body.p.next_siblings:
+        if sibling != "\n":
+            print(sibling.name)
+
+if 13 in tests:
+    # no previous siblings so generator yields no results.
+    print("-")
+    for sibling in soup.head.previous_sibling.previous_siblings:
+        print(sibling)
+    print("-")

@@ -15,4 +15,4 @@ for section in sections:
         print(question + "\n" + question_detail + "\n\n")
         with open("out.txt", "a") as file:
             file.write(question + "\n" + question_detail + "\n\n")
-        time.sleep(5)
+        time.sleep(3)
